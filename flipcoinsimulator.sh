@@ -1,11 +1,10 @@
 #!/bin/bash -x
 echo Welcome to Flip Coin Simulation. This program displays the winner Heads or Tails
-read -p "Enter the number of time wants to flip the coin: " num
 
 Heads=0
 Tails=0
 
-for ((i=0;i<$num;i++))
+while [[ $Heads -lt 21 && $Tails -lt 21 ]]
 do
 coincheck=$((RANDOM%2))
 
@@ -17,5 +16,14 @@ else
 fi
 done
 
-echo Heads: $Heads
-echo Tails: $Tails
+
+if [[ $Heads == $Tails ]]
+then
+	echo Tie
+elif [ $Heads == 21 ]
+then
+	echo Heads: $Heads
+elif [ $Tails == 21 ]
+then
+	echo Tails: $Tails
+fi
