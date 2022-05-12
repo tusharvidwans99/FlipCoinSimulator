@@ -4,8 +4,7 @@ echo Welcome to Flip Coin Simulation. This program displays the winner Heads or 
 Heads=0
 Tails=0
 
-while [[ $Heads -lt 21 && $Tails -lt 21 ]]
-do
+function checkcoin(){
 coincheck=$((RANDOM%2))
 
 if [ $coincheck -eq 1 ]
@@ -14,16 +13,27 @@ then
 else
 	Tails=$(($Tails+1))
 fi
+
+}
+
+
+while [[ $Heads -lt 21 && $Tails -lt 21 ]]
+do
+checkcoin
 done
 
 
 if [[ $Heads == $Tails ]]
 then
-	echo Tie
-elif [ $Heads == 21 ]
+	echo This is Tie. Continuing the game till the we get difference of 2 Minimum.
+	while [[ $(($Heads-$Tails)) -ge 2 || $(( $Tails-$Heads )) -ge 2 ]]
+	do
+		checkcoin
+	done
+elif [ $Heads -gt $Tails ]
 then
-	echo Heads: $Heads
-elif [ $Tails == 21 ]
+	echo Heads won by: $Heads
+elif [ $Tails -gt $Heads ]
 then
-	echo Tails: $Tails
+	echo Tails won by: $Tails
 fi
